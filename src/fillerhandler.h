@@ -63,7 +63,7 @@ public:
                     }
                 }
                 if(!found) {
-                    doLog(LOG_ERROR, "Filler cell %s not found\n", namefill);
+                    doLog(LOG_ERROR, "Filler cell %s not found\n", namefill.c_str());
                 }
             }
         }
