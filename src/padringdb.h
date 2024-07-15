@@ -38,6 +38,7 @@ public:
         m_south.setEdgePos(0.0);
         m_west.setEdgePos(0.0);
         m_designName = "PADRING";
+        m_lastpad = nullptr;
     }
 
     /** callback for a corner */
@@ -117,6 +118,7 @@ public:
         item->m_osize = cell->m_sy;
         item->m_lefinfo = cell;
         item->m_flipped = flipped;
+        item->m_havebond = false;
 
         // Corner cells should be symmetrical
         // i.e. width = height.
@@ -142,6 +144,7 @@ public:
         }
 
         m_lastLocation = location;
+        m_lastpad = item;
     }
 
     /** callback for a bond */
@@ -168,6 +171,8 @@ public:
         item->m_lefinfo = cell;
         item->m_flipped = flipped;
         item->m_offset = gd;
+        item->m_ref = m_lastpad;
+        m_lastpad->m_havebond = true;
 
         if (m_lastLocation == "N")
         {
@@ -306,6 +311,8 @@ public:
 
     std::list<std::string> m_fillers;
     std::string m_lastLocation;
+    LayoutItem* m_lastpad;
+    
 
     PRLEFReader m_lefreader;
 };

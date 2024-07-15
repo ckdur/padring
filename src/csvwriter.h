@@ -30,7 +30,7 @@
 #include "layout.h"
 #include "padringdb.h"
 
-/** a very minimal SVG writer */
+/** a CSV writer which describes positions of pads */
 class CSVWriter
 {
 public:
@@ -38,6 +38,7 @@ public:
     virtual ~CSVWriter();
 
     void writePadring(PadringDB *padring);
+    void writeCell(const LayoutItem *item, Layout::side_t s);
 
 protected:
 
@@ -46,6 +47,7 @@ protected:
     std::stringstream   m_ss;
     std::ostream        &m_def;
     int                 m_side;
+    std::string         m_designName;
 };
 
 #endif

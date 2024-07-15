@@ -43,7 +43,8 @@ public:
         m_ltype(ltype),
         m_size(-1), m_osize(-1),
         m_x(-1.0), m_y(-1.0),
-        m_flipped(false),m_offset(0.0)
+        m_flipped(false),m_offset(0.0),
+        m_ref(NULL),m_havebond(false)
     {        
     }
 
@@ -62,6 +63,8 @@ public:
     bool        m_flipped;  ///< when true, unplaced/unrotated cell is filled along y axis.
     std::list<std::string> m_fillers;
     LayoutItemType m_ltype;
+    LayoutItem* m_ref;      ///< Reference for bonds
+    bool        m_havebond; ///< For TYPE_CELL, is there a bond?
 };
 
 
