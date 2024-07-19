@@ -161,7 +161,6 @@ void CSVWriter::writeCell(const LayoutItem *item, Layout::side_t s)
         m_ss << x << "," << y << "," << item->m_location << ",";
         m_ss << cx << "," << cy << ",\n";
     }
-    std::cout << "WTF?" << std::endl;
 }
 
 void CSVWriter::writePadring(PadringDB *padring)
