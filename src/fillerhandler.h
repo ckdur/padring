@@ -24,6 +24,8 @@
 #include <list>
 #include "prlefreader.h"
 
+#define EPSILON 1e-8
+
 class FillerHandler
 {
 public:
@@ -91,7 +93,7 @@ public:
         
         for(auto cell : m_fillerCells)
         {
-            if (cell.first <= width)
+            if (cell.first - width < EPSILON)
             {
                 outCellName = cell.second;
                 return cell.first;
