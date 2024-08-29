@@ -302,7 +302,7 @@ int main(int argc, char *argv[])
                     def.writeCell(&filler);
                     ver.writeCell(&filler);
                     space -= width;
-                    if(space > 0.0 && space < padring.m_grid) {
+                    if(space > 0.0 && round(space/padring.m_grid) == 0) {
                       space = 0; // To avoid imprecision
                     }
                     pos += width;
@@ -362,7 +362,7 @@ int main(int argc, char *argv[])
                     def.writeCell(&filler);
                     ver.writeCell(&filler);
                     space -= width;
-                    if(space > 0.0 && space < padring.m_grid) {
+                    if(space > 0.0 && round(space/padring.m_grid) == 0) {
                       space = 0; // To avoid imprecision
                     }
                     pos += width;
@@ -422,7 +422,7 @@ int main(int argc, char *argv[])
                     def.writeCell(&filler);
                     ver.writeCell(&filler);
                     space -= width;
-                    if(space > 0.0 && space < padring.m_grid) {
+                    if(space > 0.0 && round(space/padring.m_grid) == 0) {
                       space = 0; // To avoid imprecision
                     }
                     pos += width;
@@ -482,7 +482,7 @@ int main(int argc, char *argv[])
                     def.writeCell(&filler);
                     ver.writeCell(&filler);
                     space -= width;
-                    if(space > 0.0 && space < padring.m_grid) {
+                    if(space > 0.0 && round(space/padring.m_grid) == 0) {
                       space = 0; // To avoid imprecision
                     }
                     pos += width;

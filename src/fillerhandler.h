@@ -85,6 +85,7 @@ public:
      **/
     double getFillerCell(double width, std::string &outCellName)
     {
+        //doLog(LOG_INFO, "(getFillerCell) Filler search with the following: %g, %s\n", width, outCellName.c_str());
         if (!m_sorted)
         {
             m_sorted = true;
@@ -93,6 +94,7 @@ public:
         
         for(auto cell : m_fillerCells)
         {
+            //doLog(LOG_INFO, "(getFillerCell) Trying: %g\n", cell.first);
             if (cell.first - width < EPSILON)
             {
                 outCellName = cell.second;
