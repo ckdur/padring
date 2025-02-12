@@ -21,6 +21,7 @@
 #define logging_h
 
 #include <string>
+#include <cstdint>
 
 typedef enum {LOG_VERBOSE = 1, LOG_DEBUG = 2, LOG_INFO = 3, LOG_WARN = 4, 
     LOG_ERROR = 8, LOG_QUIET = 255} logtype_t;

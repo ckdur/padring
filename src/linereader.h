@@ -25,6 +25,7 @@
 #include <list>
 #include <string>
 #include <string_view>
+#include <cstdint>
 
 /** Takes a line and produces a list of std::string_view objects,
  *  one for each whitespace-separated chunk.
