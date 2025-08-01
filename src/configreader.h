@@ -106,7 +106,8 @@ public:
         const std::string &instance,
         const std::string &cellname,
         bool flipped,
-        double gd)
+        double gd,
+        double gdy)
     {
         std::cout << "BOND " << instance << " " << cellname << "\n";
     }

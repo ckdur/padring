@@ -152,7 +152,8 @@ public:
         const std::string &instance,
         const std::string &cellname,
         bool flipped,
-        double gd) override
+        double gd,
+        double gdy) override
     {
         PRLEFReader::LEFCellInfo_t *cell = m_lefreader.getCellByName(cellname);
         if (cell == nullptr)
@@ -171,6 +172,7 @@ public:
         item->m_lefinfo = cell;
         item->m_flipped = flipped;
         item->m_offset = gd;
+        item->m_offsetY = gdy;
         item->m_ref = m_lastpad;
         m_lastpad->m_havebond = true;
 

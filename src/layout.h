@@ -43,7 +43,7 @@ public:
         m_ltype(ltype),
         m_size(-1), m_osize(-1),
         m_x(-1.0), m_y(-1.0),
-        m_flipped(false),m_offset(0.0),
+        m_flipped(false),m_offset(0.0),m_offsetY(0.0),
         m_ref(NULL),m_havebond(false)
     {        
     }
@@ -58,6 +58,7 @@ public:
     double      m_size;     ///< size of the item (-1 if unknown)
     double      m_osize;    ///< size of the item in the other coordinate (-1 if unknown)
     double      m_offset;   ///< offset of the item (0 by default)
+    double      m_offsetY;   ///< offset of the item (0 by default)
     double      m_x;        ///< x-position of item (-1 if unknown)
     double      m_y;        ///< y-position of item (-1 if unknown)
     bool        m_flipped;  ///< when true, unplaced/unrotated cell is filled along y axis.

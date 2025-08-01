@@ -161,8 +161,8 @@ bool Layout::doLayout()
         case LayoutItem::TYPE_BOND:
             // Only in this special case, assign the last item's position
             if(last_cell != nullptr) {
-                item->m_x = last_cell->m_x + ( m_dir == DIR_HORIZONTAL ? (last_bond + item->m_offset) : 0.0 ) ;
-                item->m_y = last_cell->m_y + ( m_dir == DIR_HORIZONTAL ? 0.0 : (last_bond + item->m_offset) ) ;
+                item->m_x = last_cell->m_x + ( m_dir == DIR_HORIZONTAL ? (last_bond + item->m_offset) : 0.0 ) + ( m_dir == DIR_HORIZONTAL ? 0.0 : (last_bond + item->m_offsetY) ) ;
+                item->m_y = last_cell->m_y + ( m_dir == DIR_HORIZONTAL ? 0.0 : (last_bond + item->m_offset) ) + ( m_dir == DIR_HORIZONTAL ? (last_bond + item->m_offsetY) : 0.0 ) ;
                 if(item->m_flipped) {
                   switch(m_side) {
                     case Layout::SIDE_NORTH: item->m_y += item->m_osize; break;
