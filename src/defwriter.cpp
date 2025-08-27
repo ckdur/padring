@@ -137,7 +137,7 @@ void DEFWriter::writeCell(const LayoutItem *item)
         }
         else
         {
-            m_ss << " FE";  // NOTE: In donn version, is W
+            m_ss << " E";  // NOTE: In donn version, is W
         }
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
         m_ss << " ;\n";
@@ -153,7 +153,7 @@ void DEFWriter::writeCell(const LayoutItem *item)
         }
         else
         {
-            m_ss << " FS";  // NOTE: In donn version, is S
+            m_ss << " FN";  // NOTE: In donn version, is S
         }
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
         m_ss << " ;\n";
@@ -169,7 +169,7 @@ void DEFWriter::writeCell(const LayoutItem *item)
         }
         else
         {
-            m_ss << " FN";  // NOTE: In donn version, is N
+            m_ss << " FS";  // NOTE: In donn version, is N
         }
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
         m_ss << " ;\n";
