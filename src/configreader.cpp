@@ -402,7 +402,7 @@ bool ConfigReader::parseBond()
         if (tok == TOK_NUMBER) {
             try
             {
-                gdy = std::stod(g);
+                gdy = std::stod(tokstr);
             }
             catch(const std::invalid_argument& ia)
             {
