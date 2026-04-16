@@ -23,7 +23,7 @@
 #include "layout.h"
 
 
-Layout::Layout(direction_t dir, side_t side) : m_dir(dir), m_side(side), m_edgePos(0.0), m_insertFlexSpacer(true)
+Layout::Layout(direction_t dir, side_t side) : m_dir(dir), m_side(side), m_edgePos(0.0), m_insertFlexSpacer(true), m_offPos(0.0)
 {
     m_firstCorner = nullptr;
     m_lastCorner  = nullptr;
@@ -128,7 +128,7 @@ bool Layout::doLayout()
     if (m_firstCorner != nullptr)
     {
         pos += m_firstCorner->m_size;
-        setItemPos(m_firstCorner, 0.0);
+        setItemPos(m_firstCorner, m_offPos);
         setItemEdgePos(m_firstCorner);
     }
 
@@ -139,7 +139,7 @@ bool Layout::doLayout()
     double last_bond = 0.0;
     for(auto item : m_items)
     {
-        setItemPos(item, pos);
+        setItemPos(item, pos+m_offPos);
         doLog(LOG_INFO,"Processing cell %s inst %s (%d)\n", item->m_instance.c_str(), item->m_cellname.c_str(), item->m_ltype);
 
         // advance the position depending on the type of
@@ -190,7 +190,7 @@ bool Layout::doLayout()
     // position the last corner
     if (m_lastCorner != nullptr)
     {
-        setItemPos(m_lastCorner, m_dieSize - m_lastCorner->m_size);
+        setItemPos(m_lastCorner, m_dieSize - m_lastCorner->m_size + m_offPos);
         setItemEdgePos(m_lastCorner);
     }
 

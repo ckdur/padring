@@ -165,6 +165,11 @@ public:
         setItemEdgePos(m_lastCorner);
     }
 
+    void setOffset(double offPos)
+    {
+        m_offPos = offPos;
+    }
+
     /** get the minimum size of all the items */
     double getMinSize() const;
 
@@ -243,8 +248,9 @@ protected:
     double m_dieSize;   ///< die size in the direction of layout
 
     direction_t             m_dir;      ///< direction of layout
-    side_t                  m_side;      ///< direction of layout
+    side_t                  m_side;     ///< direction of layout
     double                  m_edgePos;  ///< position of fixed axis of layout
+    double                  m_offPos;   ///< offset position of layout
     double                  m_grid;     ///< the grid
     std::list<LayoutItem*>  m_items;    ///< all the cells in the padring
     LayoutItem *m_firstCorner;

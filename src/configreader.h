@@ -118,6 +118,12 @@ public:
         std::cout << "Area " << x << " " << y << "\n";
     }
 
+    /** callback for die margin in microns */
+    virtual void onMargin(double l, double b, double r, double t) 
+    {
+        std::cout << "Margin " << l << " " << b << " " << r << " " << t << "\n";
+    }
+
     /** callback for grid spacing in microns */
     virtual void onGrid(double grid)
     {
@@ -173,6 +179,7 @@ protected:
     bool parseBond();
     bool parseCorner();
     bool parseArea();
+    bool parseMargin();
     bool parseGrid();
     bool parseSpace();
     bool parseOffset();

@@ -257,7 +257,7 @@ int main(int argc, char *argv[])
     
     int numfill = 0;
 
-    double north_y = padring.m_dieHeight;
+    double north_y = padring.m_dieHeight - padring.m_margin_t;
     for(auto item : padring.m_north)
     {
         if (item->m_ltype == LayoutItem::TYPE_CELL)
@@ -317,7 +317,7 @@ int main(int argc, char *argv[])
         }        
     }
 
-    double south_y = 0;
+    double south_y = padring.m_margin_b;
     for(auto item : padring.m_south)
     {
         if (item->m_ltype == LayoutItem::TYPE_CELL)
@@ -377,7 +377,7 @@ int main(int argc, char *argv[])
         }        
     }
 
-    double west_x = 0;
+    double west_x = padring.m_margin_l;
     for(auto item : padring.m_west)
     {
         if (item->m_ltype == LayoutItem::TYPE_CELL)
@@ -437,7 +437,7 @@ int main(int argc, char *argv[])
         }        
     }
 
-    double east_x = padring.m_dieWidth;
+    double east_x = padring.m_dieWidth - padring.m_margin_r;
     for(auto item : padring.m_east)
     {
         if (item->m_ltype == LayoutItem::TYPE_CELL)

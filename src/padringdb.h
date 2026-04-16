@@ -33,7 +33,7 @@ public:
         m_south(Layout::DIR_HORIZONTAL, Layout::SIDE_SOUTH),
         m_east(Layout::DIR_VERTICAL, Layout::SIDE_EAST),
         m_west(Layout::DIR_VERTICAL, Layout::SIDE_WEST),
-        m_grid(1.0) 
+        m_grid(1.0), m_margin_l(0.0), m_margin_b(0.0), m_margin_r(0.0), m_margin_t(0.0)
     {
         m_south.setEdgePos(0.0);
         m_west.setEdgePos(0.0);
@@ -213,6 +213,32 @@ public:
         m_east.setEdgePos(x);        
     }
 
+    virtual void onMargin(double l, double b, double r, double t) override
+    {
+        m_margin_l = l;
+        m_margin_b = b;
+        m_margin_r = r;
+        m_margin_t = t;
+
+        double x = m_dieWidth - l - r;
+        double y = m_dieHeight - b - t;
+        
+        m_north.setDieSize(x);
+        m_south.setDieSize(x);
+        m_east.setDieSize(y);
+        m_west.setDieSize(y);
+
+        m_south.setEdgePos(b);
+        m_west.setEdgePos(l);
+        m_north.setEdgePos(m_dieHeight - t);
+        m_east.setEdgePos(m_dieWidth - r);
+
+        m_north.setOffset(l);
+        m_south.setOffset(l);
+        m_east.setOffset(b);
+        m_west.setOffset(b);
+    }
+
     /** callback for grid spacing in microns */
     virtual void onGrid(double grid) override
     {
@@ -308,6 +334,10 @@ public:
     double m_dieHeight;
     double m_dieWidth;
     double m_grid;
+    double m_margin_l;
+    double m_margin_b;
+    double m_margin_r;
+    double m_margin_t;
 
     std::string m_designName;
 

@@ -225,6 +225,10 @@ bool ConfigReader::parse(std::istream &configstream)
                 {
                     if (!parseArea()) return false;
                 }
+                else if (tokstr == "MARGIN")
+                {
+                    if (!parseMargin()) return false;
+                }
                 else if (tokstr == "PAD")
                 {
                     if (!parsePad()) return false;
@@ -528,6 +532,70 @@ bool ConfigReader::parseArea()
     }
 
     onArea(wd,hd);
+    return true;
+}
+
+bool ConfigReader::parseMargin()
+{
+    // AREA: x y 
+    std::string tokstr;
+    std::string l,b,r,t;
+
+    // left
+    ConfigReader::token_t tok = tokenize(l);
+    if (tok != TOK_NUMBER)
+    {
+        error("Expected a number for margin in left\n");
+        return false;
+    }
+
+    // bottom
+    tok = tokenize(b);
+    if (tok != TOK_NUMBER)
+    {
+        error("Expected a number for margin in bottom\n");
+        return false;
+    }
+
+    // right
+    tok = tokenize(r);
+    if (tok != TOK_NUMBER)
+    {
+        error("Expected a number for margin in right\n");
+        return false;
+    }
+
+    // top
+    tok = tokenize(t);
+    if (tok != TOK_NUMBER)
+    {
+        error("Expected a number for margin in top\n");
+        return false;
+    }
+
+    // expect semicol
+    tok = tokenize(tokstr);
+    if (tok != TOK_SEMICOL)
+    {
+        error("Expected ;\n");
+        return false;
+    }
+
+    double ld, bd, rd, td;
+    try
+    {
+        ld = std::stod(l);
+        bd = std::stod(b);
+        rd = std::stod(r);
+        td = std::stod(t);
+    }
+    catch(const std::invalid_argument& ia)
+    {
+        error(ia.what());
+        return false;
+    }
+
+    onMargin(ld, bd, rd, td);
     return true;
 }
 
