@@ -28,6 +28,10 @@
 
 #include "../linereader.h"
 
+#define SYMMETRY_X (1 << 0)
+#define SYMMETRY_Y (1 << 1)
+#define SYMMETRY_R90 (1 << 2)
+
 /** reads a blif stream and generates callbacks for every relevant
     item, such as .input .output etc.
 */
@@ -73,7 +77,7 @@ public:
     virtual void onSize(double sx, double sy) {}
 
     /** callback for SYMMETRY within a macro */
-    virtual void onSymmetry(const std::string &symmetry) {}
+    virtual void onSymmetry(const uint32_t symmetry) {}
 
     /** callback for SITE within a macro */
     virtual void onSite(const std::string &site) {}

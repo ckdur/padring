@@ -114,8 +114,20 @@ public:
         item->m_instance = instance;
         item->m_cellname = cellname;
         item->m_location = location;
-        item->m_size = cell->m_sx;
-        item->m_osize = cell->m_sy;
+        if(cell->m_symmetry & SYMMETRY_R90) {
+            item->m_size = cell->m_sx;
+            item->m_osize = cell->m_sy;
+        }
+        else { // It cannot be rotated. Most likely is already rotated
+            if(location == "N" || location == "S") {
+                item->m_size = cell->m_sx;
+                item->m_osize = cell->m_sy;
+            }
+            else {
+                item->m_size = cell->m_sy;
+                item->m_osize = cell->m_sx;
+            }
+        }
         item->m_lefinfo = cell;
         item->m_flipped = flipped;
         item->m_havebond = false;

@@ -32,7 +32,7 @@ void DebugUtils::dumpToConsole(const PRLEFReader::LEFCellInfo_t *cell)
         ss << "Width    " << cell->m_sx << "\n";
         ss << "Height   " << cell->m_sy << "\n";
         ss << "Type     " << (cell->m_isFiller ? "FILLER" : "REGULAR") << "\n";
-        ss << "Symmetry " << cell->m_symmetry.c_str() << "\n";
+        ss << "Symmetry " << cell->m_symmetry << "\n";
     }
     else
     {

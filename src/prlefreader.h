@@ -45,7 +45,7 @@ public:
     virtual void onSize(double sx, double sy) override;
 
     /** callback for SYMMETRY within a macro */
-    virtual void onSymmetry(const std::string &symmetry) override;
+    virtual void onSymmetry(const uint32_t symmetry) override;
 
 
     /** callback for UNITS DATABASE MICRONS */
@@ -84,7 +84,7 @@ public:
         std::string     m_foreign;  ///< foreign name
         double          m_sx;       ///< size in microns
         double          m_sy;       ///< size in microns
-        std::string     m_symmetry; ///< symmetry string taken from LEF.
+        uint32_t        m_symmetry; ///< symmetry string taken from LEF.
         bool            m_isFiller; ///< whenever this cell is a filler.
         std::unordered_map<std::string, LEFPinInfo_t*> m_pins;       
     };

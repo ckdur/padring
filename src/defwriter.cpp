@@ -95,7 +95,8 @@ void DEFWriter::writeCell(const LayoutItem *item)
         y -= item->m_lefinfo->m_sx;
         toDEFCoordinates(x,y);
         m_ss << "    + PLACED ( " << x << " " << y << " ) ";
-        m_ss << "E";  // NOTE: In donn version, is W
+        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90) m_ss << "E";
+        else                                           m_ss << "FS"; // TODO: Confirm
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
         m_ss << " ;\n";
     }
@@ -105,7 +106,8 @@ void DEFWriter::writeCell(const LayoutItem *item)
         //x += item->m_lefinfo->m_sy;
         toDEFCoordinates(x,y);
         m_ss << "    + PLACED ( " << x << " " << y << " ) ";
-        m_ss << "W";  // NOTE: In donn version, is E
+        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90) m_ss << "W";
+        else                                           m_ss << "FN"; // TODO: Confirm
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
         m_ss << " ;\n";
     }
@@ -114,7 +116,7 @@ void DEFWriter::writeCell(const LayoutItem *item)
         y -= item->m_lefinfo->m_sy;
         toDEFCoordinates(x,y);
         m_ss << "    + PLACED ( " << x << " " << y << " ) ";
-        m_ss << "S";  // NOTE: In donn version, is N
+        m_ss << "S";
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
         m_ss << " ;\n";
     }
@@ -122,7 +124,7 @@ void DEFWriter::writeCell(const LayoutItem *item)
     {
         toDEFCoordinates(x,y);
         m_ss << "    + PLACED ( " << x << " " << y << " ) ";
-        m_ss << "N";  // NOTE: In donn version, is S
+        m_ss << "N";
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
         m_ss << " ;\n";
     }
@@ -131,13 +133,13 @@ void DEFWriter::writeCell(const LayoutItem *item)
         x -= item->m_lefinfo->m_sy;
         toDEFCoordinates(x,y);
         m_ss << "    + PLACED ( " << x << " " << y << " ) ";
-        if (!item->m_flipped) 
-        {
-            m_ss << " W";  // NOTE: In donn version, is E
+        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90) {
+            if (!item->m_flipped) m_ss << " W";
+            else                  m_ss << " E";
         }
-        else
-        {
-            m_ss << " E";  // NOTE: In donn version, is W
+        else {
+            if (!item->m_flipped) m_ss << " N";
+            else                  m_ss << " FS";
         }
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
         m_ss << " ;\n";
@@ -147,14 +149,8 @@ void DEFWriter::writeCell(const LayoutItem *item)
         y -= item->m_lefinfo->m_sy;
         toDEFCoordinates(x,y);
         m_ss << "    + PLACED ( " << x << " " << y << " ) ";
-        if (!item->m_flipped) 
-        {
-            m_ss << " S";  // NOTE: In donn version, is N
-        }
-        else
-        {
-            m_ss << " FN";  // NOTE: In donn version, is S
-        }
+        if (!item->m_flipped) m_ss << " S";
+        else                  m_ss << " FN";
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
         m_ss << " ;\n";
     }   
@@ -163,28 +159,22 @@ void DEFWriter::writeCell(const LayoutItem *item)
         //y -= item->m_lefinfo->m_sy;
         toDEFCoordinates(x,y);
         m_ss << "    + PLACED ( " << x << " " << y << " ) ";
-        if (!item->m_flipped)
-        {
-            m_ss << " N";  // NOTE: In donn version, is S
-        }
-        else
-        {
-            m_ss << " FS";  // NOTE: In donn version, is N
-        }
+        if (!item->m_flipped) m_ss << " N";
+        else                  m_ss << " FS";
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
         m_ss << " ;\n";
     }        
-    else
+    else // (item->m_location == "W")
     {
         toDEFCoordinates(x,y);
         m_ss << "    + PLACED ( " << x << " " << y << " ) ";
-        if (!item->m_flipped) 
-        {
-            m_ss << " E";  // NOTE: In donn version, is W
+        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90) {
+            if (!item->m_flipped) m_ss << " E";
+            else                  m_ss << " W";
         }
-        else
-        {
-            m_ss << " W";  // NOTE: In donn version, is E
+        else {
+            if (!item->m_flipped) m_ss << " S";
+            else                  m_ss << " FN";
         }
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
         m_ss << " ;\n";

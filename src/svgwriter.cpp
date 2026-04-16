@@ -82,26 +82,48 @@ void SVGWriter::writeCell(const LayoutItem *item)
     else if (item->m_location == "E")
     {
         // East orientation
-        rot = 90.0;
+        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90)
+            rot = 90.0;
+        else {
+            x -= item->m_lefinfo->m_sx;
+            //y += item->m_lefinfo->m_sy;
+            rot = 0.0;
+        }
     }
     else if (item->m_location == "W")
     {
         // West 
-        y += item->m_lefinfo->m_sx;
-        rot = 270.0;
+        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90) {
+            y += item->m_lefinfo->m_sx;
+            rot = 270.0;
+        }
+        else {
+            x += item->m_lefinfo->m_sx;
+            y += item->m_lefinfo->m_sy;
+            rot = 180.0;
+        }
     }
 
     // do corners
     if (item->m_location == "NW")
     {
         // North West orientation, rotation = 270 degrees
-        rot = 270.0;
+        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90) {
+            rot = 270.0;
+        }
+        else {
+            x += item->m_lefinfo->m_sx;
+            rot = 180.0;
+        }
     }
     else if (item->m_location == "SE")
     {
         // South East orientation, rotation = 90 degrees
-        x += item->m_lefinfo->m_sy;
-        rot = 90.0;
+        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90) {
+            x += item->m_lefinfo->m_sy;
+            rot = 90.0;
+        }
+        // The else is just 0.0
     }
     else if (item->m_location == "NE")
     {

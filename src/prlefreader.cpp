@@ -88,7 +88,7 @@ void PRLEFReader::onForeign(const std::string &foreignName, double ox, double oy
     m_parseCell->m_foreign = foreignName;
 }
 
-void PRLEFReader::onSymmetry(const std::string &symmetry)
+void PRLEFReader::onSymmetry(const uint32_t symmetry)
 {
     if (m_parseCell == nullptr)
     {

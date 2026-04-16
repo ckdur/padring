@@ -582,18 +582,28 @@ bool LEFReader::parseSymmetry()
     // SYMMETRY (X|Y|R90)+ ';' 
 
     
-    std::string symmetry;
+    uint32_t symmetry = 0;
 
     // read options until we get to the semicolon.
     m_curtok = tokenize(m_tokstr);
     while(m_curtok!= TOK_SEMICOL)
     {
-        symmetry += m_tokstr;
-        symmetry += " ";
+        if(m_tokstr == "X") {
+            symmetry |= SYMMETRY_X;
+        }
+        else if (m_tokstr == "Y") {
+            symmetry |= SYMMETRY_Y;
+        }
+        else if (m_tokstr == "R90") {
+            symmetry |= SYMMETRY_R90;
+        }
+        else {
+            std::cout << "[WARN] WRONG SYMMETRY: " << m_curtok << "\n";
+        }
         m_curtok = tokenize(m_tokstr);
     }
 
-    //std::cout << "  SYMMETRY " << symmetry << "\n";
+    onSymmetry(symmetry);
 
     return true;
 };
