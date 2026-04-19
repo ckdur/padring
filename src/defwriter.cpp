@@ -94,7 +94,7 @@ void DEFWriter::writeCell(const LayoutItem *item)
     {
         y -= item->m_lefinfo->m_sx;
         toDEFCoordinates(x,y);
-        m_ss << "    + PLACED ( " << x << " " << y << " ) ";
+        m_ss << "    + PLACED ( " << std::fixed << std::setprecision(0) << x << " " << y << " ) ";
         if(item->m_lefinfo->m_symmetry & SYMMETRY_R90) m_ss << "E";
         else                                           m_ss << "FS"; // TODO: Confirm
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
@@ -105,7 +105,7 @@ void DEFWriter::writeCell(const LayoutItem *item)
         // South East orientation, rotation = 90 degrees
         //x += item->m_lefinfo->m_sy;
         toDEFCoordinates(x,y);
-        m_ss << "    + PLACED ( " << x << " " << y << " ) ";
+        m_ss << "    + PLACED ( " << std::fixed << std::setprecision(0) << x << " " << y << " ) ";
         if(item->m_lefinfo->m_symmetry & SYMMETRY_R90) m_ss << "W";
         else                                           m_ss << "FN"; // TODO: Confirm
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
@@ -115,7 +115,7 @@ void DEFWriter::writeCell(const LayoutItem *item)
     {
         y -= item->m_lefinfo->m_sy;
         toDEFCoordinates(x,y);
-        m_ss << "    + PLACED ( " << x << " " << y << " ) ";
+        m_ss << "    + PLACED ( " << std::fixed << std::setprecision(0) << x << " " << y << " ) ";
         m_ss << "S";
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
         m_ss << " ;\n";
@@ -123,21 +123,24 @@ void DEFWriter::writeCell(const LayoutItem *item)
     else if (item->m_location == "SW")
     {
         toDEFCoordinates(x,y);
-        m_ss << "    + PLACED ( " << x << " " << y << " ) ";
+        m_ss << "    + PLACED ( " << std::fixed << std::setprecision(0) << x << " " << y << " ) ";
         m_ss << "N";
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
         m_ss << " ;\n";
     }
     else if (item->m_location == "E")
     {
-        x -= item->m_lefinfo->m_sy;
-        toDEFCoordinates(x,y);
-        m_ss << "    + PLACED ( " << x << " " << y << " ) ";
         if(item->m_lefinfo->m_symmetry & SYMMETRY_R90) {
+            x -= item->m_lefinfo->m_sy;
+            toDEFCoordinates(x,y);
+            m_ss << "    + PLACED ( " << std::fixed << std::setprecision(0) << x << " " << y << " ) ";
             if (!item->m_flipped) m_ss << " W";
             else                  m_ss << " E";
         }
         else {
+            x -= item->m_lefinfo->m_sx;
+            toDEFCoordinates(x,y);
+            m_ss << "    + PLACED ( " << std::fixed << std::setprecision(0) << x << " " << y << " ) ";
             if (!item->m_flipped) m_ss << " N";
             else                  m_ss << " FS";
         }
@@ -148,7 +151,7 @@ void DEFWriter::writeCell(const LayoutItem *item)
     {
         y -= item->m_lefinfo->m_sy;
         toDEFCoordinates(x,y);
-        m_ss << "    + PLACED ( " << x << " " << y << " ) ";
+        m_ss << "    + PLACED ( " << std::fixed << std::setprecision(0) << x << " " << y << " ) ";
         if (!item->m_flipped) m_ss << " S";
         else                  m_ss << " FN";
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
@@ -158,7 +161,7 @@ void DEFWriter::writeCell(const LayoutItem *item)
     {
         //y -= item->m_lefinfo->m_sy;
         toDEFCoordinates(x,y);
-        m_ss << "    + PLACED ( " << x << " " << y << " ) ";
+        m_ss << "    + PLACED ( " << std::fixed << std::setprecision(0) << x << " " << y << " ) ";
         if (!item->m_flipped) m_ss << " N";
         else                  m_ss << " FS";
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
@@ -167,7 +170,7 @@ void DEFWriter::writeCell(const LayoutItem *item)
     else // (item->m_location == "W")
     {
         toDEFCoordinates(x,y);
-        m_ss << "    + PLACED ( " << x << " " << y << " ) ";
+        m_ss << "    + PLACED ( " << std::fixed << std::setprecision(0) << x << " " << y << " ) ";
         if(item->m_lefinfo->m_symmetry & SYMMETRY_R90) {
             if (!item->m_flipped) m_ss << " E";
             else                  m_ss << " W";

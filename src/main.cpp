@@ -217,7 +217,11 @@ int main(int argc, char *argv[])
 
     SVGWriter svg(svgos, padring.m_dieWidth, padring.m_dieHeight);
     DEFWriter def(defos, padring.m_dieWidth, padring.m_dieHeight);
-    def.setDatabaseUnits(LEFDatabaseUnits);
+
+    double dGridUnits = (double)1.0/padring.m_grid;
+    if(dGridUnits > LEFDatabaseUnits) def.setDatabaseUnits(dGridUnits);
+    else                              def.setDatabaseUnits(LEFDatabaseUnits);
+    
     def.setDesignName(padring.m_designName);
     VerilogWriter ver(veros);
     ver.setDesignName(padring.m_designName);
