@@ -81,7 +81,8 @@ public:
     virtual void onCorner(
         const std::string &instance,
         const std::string &location,
-        const std::string &cellname)
+        const std::string &cellname,
+        const bool noRot)
     {
         std::cout << "CORNER " << instance << " " << location << " " << cellname << "\n";
     }

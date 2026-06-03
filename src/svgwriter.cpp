@@ -82,7 +82,7 @@ void SVGWriter::writeCell(const LayoutItem *item)
     else if (item->m_location == "E")
     {
         // East orientation
-        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90)
+        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90 && !item->m_noRot)
             rot = 90.0;
         else {
             x -= item->m_lefinfo->m_sx;
@@ -93,7 +93,7 @@ void SVGWriter::writeCell(const LayoutItem *item)
     else if (item->m_location == "W")
     {
         // West 
-        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90) {
+        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90 && !item->m_noRot) {
             y += item->m_lefinfo->m_sx;
             rot = 270.0;
         }
@@ -108,7 +108,7 @@ void SVGWriter::writeCell(const LayoutItem *item)
     if (item->m_location == "NW")
     {
         // North West orientation, rotation = 270 degrees
-        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90) {
+        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90 && !item->m_noRot) {
             rot = 270.0;
         }
         else {
@@ -119,7 +119,7 @@ void SVGWriter::writeCell(const LayoutItem *item)
     else if (item->m_location == "SE")
     {
         // South East orientation, rotation = 90 degrees
-        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90) {
+        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90 && !item->m_noRot) {
             x += item->m_lefinfo->m_sy;
             rot = 90.0;
         }

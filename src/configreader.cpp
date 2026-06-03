@@ -444,6 +444,7 @@ bool ConfigReader::parseCorner()
     std::string instance;
     std::string location;
     std::string cellname;
+    bool noRot = false;
 
     // instance name
     ConfigReader::token_t tok = tokenize(instance);
@@ -477,15 +478,26 @@ bool ConfigReader::parseCorner()
         return false;
     }
 
-    // expect semicol
+    // optional NOROT
     tok = tokenize(tokstr);
+    if(tok == TOK_IDENT)
+    {
+        if(tokstr != "NOROT") {
+            error("Expected NOROT, or semicolon (;)");
+            return false;
+        }
+        noRot = true;
+        tok = tokenize(tokstr);
+    }
+
+    // expect semicol
     if (tok != TOK_SEMICOL)
     {
-        error("Expected ;\n");
+        error("Expected ; in corner\n");
         return false;
     }
 
-    onCorner(instance,location,cellname);
+    onCorner(instance,location,cellname,noRot);
     return true;
 }
 

@@ -17,6 +17,7 @@
     
 */
 
+#include <iostream>
 #include <sstream>
 #include <fstream>
 #include <iomanip>
@@ -94,9 +95,11 @@ void DEFWriter::writeCell(const LayoutItem *item)
     {
         y -= item->m_lefinfo->m_sx;
         toDEFCoordinates(x,y);
+        std::cout << "DEBUG NW: " << item->m_noRot << std::endl;
         m_ss << "    + PLACED ( " << std::fixed << std::setprecision(0) << x << " " << y << " ) ";
-        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90) m_ss << "E";
-        else                                           m_ss << "FS"; // TODO: Confirm
+        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90 && 
+            !item->m_noRot) m_ss << "E";
+        else                m_ss << "FS"; // TODO: Confirm
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
         m_ss << " ;\n";
     }
@@ -106,8 +109,9 @@ void DEFWriter::writeCell(const LayoutItem *item)
         //x += item->m_lefinfo->m_sy;
         toDEFCoordinates(x,y);
         m_ss << "    + PLACED ( " << std::fixed << std::setprecision(0) << x << " " << y << " ) ";
-        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90) m_ss << "W";
-        else                                           m_ss << "FN"; // TODO: Confirm
+        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90 && 
+            !item->m_noRot) m_ss << "W";
+        else                m_ss << "FN"; // TODO: Confirm
         if(item->m_ltype == LayoutItem::TYPE_BOND) m_ss << " + SOURCE DIST";
         m_ss << " ;\n";
     }
@@ -130,7 +134,7 @@ void DEFWriter::writeCell(const LayoutItem *item)
     }
     else if (item->m_location == "E")
     {
-        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90) {
+        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90 && !item->m_noRot) {
             x -= item->m_lefinfo->m_sy;
             toDEFCoordinates(x,y);
             m_ss << "    + PLACED ( " << std::fixed << std::setprecision(0) << x << " " << y << " ) ";
@@ -171,7 +175,7 @@ void DEFWriter::writeCell(const LayoutItem *item)
     {
         toDEFCoordinates(x,y);
         m_ss << "    + PLACED ( " << std::fixed << std::setprecision(0) << x << " " << y << " ) ";
-        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90) {
+        if(item->m_lefinfo->m_symmetry & SYMMETRY_R90 && !item->m_noRot) {
             if (!item->m_flipped) m_ss << " E";
             else                  m_ss << " W";
         }

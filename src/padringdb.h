@@ -45,7 +45,8 @@ public:
     virtual void onCorner(
         const std::string &instance,
         const std::string &location,
-        const std::string &cellname) override
+        const std::string &cellname,
+        const bool noRot) override
     {
         PRLEFReader::LEFCellInfo_t *cell = m_lefreader.getCellByName(cellname);
         if (cell == nullptr)
@@ -60,6 +61,7 @@ public:
         item_x->m_location = location;
         item_x->m_size = cell->m_sx;
         item_x->m_lefinfo = cell;
+        item_x->m_noRot = noRot;
 
         LayoutItem *item_y = new LayoutItem(LayoutItem::TYPE_CORNER);
         item_y->m_instance = instance;
@@ -67,6 +69,7 @@ public:
         item_y->m_location = location;
         item_y->m_size = cell->m_sy;
         item_y->m_lefinfo = cell;
+        item_y->m_noRot = noRot;
 
         // Corner cells should be symmetrical
         // i.e. width = height.
